@@ -1,0 +1,18 @@
+services:
+  airflow:
+    image: ${AIRFLOW_IMAGE}
+    container_name: airflow_tp
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./jobs:/opt/airflow/jobs
+      - ./data:/opt/airflow/data
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./simple_auth_manager_passwords.json:/opt/airflow/simple_auth_manager_passwords.json.generated
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/data/airflow.db
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: admin:admin
+    command: airflow standalone

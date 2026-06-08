@@ -1,0 +1,7 @@
+.env
+logs/
+data/
+airflow.db/
+__pycache__/
+*.pyc
+simple_auth_manager_passwords.json
